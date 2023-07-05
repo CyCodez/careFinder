@@ -1,0 +1,11 @@
+section p {
+  font-size: 18px;
+}
+section button {
+  border-style: none;
+  margin-left: 5px;
+  font-size: 16px;
+  /* font-weight: lighter; */
+  cursor: pointer;
+  color: blue;
+}
