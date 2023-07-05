@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import { Myroutes } from "./data";
 import { NavLink } from "react-router-dom";
+import Facebook from "../ButtonComponents/Facebook";
 
 const Navbar = () => {
   const [showLinks, setShowLinks] = useState(false);
@@ -98,6 +99,10 @@ const Navbar = () => {
           </button>
           <button className="auth-Btn" onClick={handleLogout}>
             SignOut
+          </button>
+          <button className="auth-Btn">
+            {" "}
+            <Facebook />
           </button>
         </div>
       </div>

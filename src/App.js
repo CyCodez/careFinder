@@ -145,7 +145,6 @@ function App() {
 
   return (
     <div className="App">
-      <Facebook />
       {/* <FroalaEditor tag="textarea" /> */}
       <ToastContainer />
       <Navbar />

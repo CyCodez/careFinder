@@ -24,9 +24,10 @@ const options = {
 const MapWithSearch: React.FC = () => {
   const [searchBox, setSearchBox] = useState<any>(null);
   const [searchResults, setSearchResults] = useState<any[]>([]);
+  const apiKey = process.env.REACT_APP_API_KEY;
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyByB7z7Xun7AvLkfRMAkkrHBENxt18m7lU",
+    googleMapsApiKey: apiKey,
     libraries,
   });
 
