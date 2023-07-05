@@ -1,47 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import care from "./careImg.jpg";
 import "./home.css";
-import { useLoadScript } from "@react-google-maps/api";
 import FooterLayout from "../FooterLayout";
 
-const libraries = ["places"];
 function HomePage(): React.JSX.Element {
-  const [searchBox, setSearchBox] = useState<any>(null);
-  const [selectedPlace, setSelectedPlace] = useState<any>(null);
-
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyByB7z7Xun7AvLkfRMAkkrHBENxt18m7lU",
-    libraries,
-  });
-
-  const onLoad = (ref: any) => {
-    setSearchBox(ref);
-  };
-
-  const onPlaceChanged = () => {
-    const places = searchBox.getPlaces();
-    if (places && places.length > 0) {
-      const place = places[0];
-      setSelectedPlace(place);
-
-      // Fetch additional details about the selected place
-      const placeService = new window.google.maps.places.PlacesService(
-        document.createElement("div")
-      );
-      placeService.getDetails(
-        { placeId: place.place_id },
-        (result: any, status: any) => {
-          if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-            console.log(result);
-          }
-        }
-      );
-    }
-  };
-
-  if (loadError) return <div>Error loading Google Maps</div>;
-  if (!isLoaded) return <div>Loading...</div>;
-
   return (
     <>
       <div className="home-Container">
