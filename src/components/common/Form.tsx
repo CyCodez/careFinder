@@ -1,10 +1,22 @@
-import * as React from "react";
+import React, { ChangeEvent } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import BasicButtons from "./Button";
+import BasicButtons from "./Button.tsx";
+import { Helmet } from "react-helmet-async";
 import "./Form.css";
 
-export default function BasicTextFields({
+interface BasicTextFieldsProps {
+  title: string;
+  btnTitle: string;
+  setPassword: (password: string) => void;
+  setEmail: (email: string) => void;
+  handleAction: () => void;
+  SignUpComponent?: JSX.Element;
+  LoginInComponent?: JSX.Element;
+  pwdtxt?: string;
+}
+
+const BasicTextFields: React.FC<BasicTextFieldsProps> = ({
   title,
   btnTitle,
   setPassword,
@@ -12,10 +24,23 @@ export default function BasicTextFields({
   handleAction,
   SignUpComponent,
   LoginInComponent,
-  Facebook,
-}) {
+  pwdtxt,
+}) => {
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
   return (
     <div className="formContainer">
+      <Helmet>
+        <title>Login/Signup page</title>
+        <meta name="description" content="contains login/signup details" />
+        <link rel="canonical" href="/login" />
+      </Helmet>
       <Box
         component="form"
         sx={{
@@ -36,19 +61,21 @@ export default function BasicTextFields({
           id="email"
           label="Enter Your Email"
           variant="outlined"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleEmailChange}
         />
         <TextField
           id="password"
           label="Enter Your Password"
           variant="outlined"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handlePasswordChange}
         />
+        <p>{pwdtxt}</p>
         <BasicButtons btnTitle={btnTitle} handleAction={handleAction} />
         {SignUpComponent}
         {LoginInComponent}
-        {Facebook}
       </Box>
     </div>
   );
-}
+};
+
+export default BasicTextFields;

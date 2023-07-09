@@ -1,7 +1,15 @@
-import * as React from "react";
+import React from "react";
 import Button from "@mui/material/Button";
 
-export default function BasicButtons({ btnTitle, handleAction }) {
+interface BasicButtonsProps {
+  btnTitle: string;
+  handleAction: () => void;
+}
+
+const BasicButtons: React.FC<BasicButtonsProps> = ({
+  btnTitle,
+  handleAction,
+}) => {
   return (
     <Button
       color="primary"
@@ -12,4 +20,6 @@ export default function BasicButtons({ btnTitle, handleAction }) {
       {btnTitle}
     </Button>
   );
-}
+};
+
+export default BasicButtons;

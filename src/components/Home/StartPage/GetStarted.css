@@ -1,0 +1,28 @@
+.get-started-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: justify;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.get-started-container h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.get-started-container h2 {
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-align: justify;
+  color: darkblue;
+}
+
+.get-started-container p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}

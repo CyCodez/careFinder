@@ -1,5 +1,8 @@
 .formContainer {
   text-align: center;
-  margin: 15px;
+  margin-left: -22px;
   margin-top: -70px;
+}
+.formContainer p {
+  font-style: italic;
 }

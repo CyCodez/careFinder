@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import care from "./careImg.jpg";
 import "./home.css";
-import FooterLayout from "../FooterLayout";
+import FooterLayout from "../About/FooterLayout.tsx";
+import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { getAuth } from "firebase/auth";
+import { Helmet } from "react-helmet-async";
+import { signOut } from "firebase/auth";
 
 function HomePage(): React.JSX.Element {
+  const auth = getAuth();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!auth) {
+      signOut(auth).then(() => {
+        navigate("/login");
+      });
+    }
+  }, []);
   return (
     <>
       <div className="home-Container">
+        <Helmet>
+          <title>Home Page</title>
+          <meta
+            name="description"
+            content="gives an overview of the entire application"
+          />
+          <link rel="canonical" href="/home" />
+        </Helmet>
         <div className="homeText1">
           <h2 className="flex1s">
             Find The nearest hospital to you and make an appointment today
@@ -19,12 +41,14 @@ function HomePage(): React.JSX.Element {
             </p>
           </div>
           <div className="flex1s">
-            <button className="startBtn">
-              <span className="startText">GET STARTED</span>
-            </button>
+            <NavLink to="/startPage">
+              <button className="startBtn">
+                <span className="startText">GET STARTED</span>
+              </button>
+            </NavLink>
           </div>
           <div className="flex1s">
-            <p className="para1">Learn more</p>
+            <p className="para1">health Is wealth</p>
           </div>
         </div>
         <div className="photoContainer">

@@ -9,3 +9,10 @@ section button {
   cursor: pointer;
   color: blue;
 }
+.Fbtn {
+  font-size: 20px;
+  color: darkblue;
+  background-color: white;
+  border-style: none;
+  cursor: pointer;
+}

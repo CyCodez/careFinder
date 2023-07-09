@@ -5,8 +5,9 @@ import {
   useLoadScript,
 } from "@react-google-maps/api";
 import "./hospital.css";
+import ReactMarkdown from "react-markdown";
 import { FaPhone } from "react-icons/fa";
-
+import { Helmet } from "react-helmet-async";
 const libraries = ["places"];
 const mapContainerStyle = {
   width: "100%",
@@ -25,7 +26,11 @@ const MapWithSearch: React.FC = () => {
   const [searchBox, setSearchBox] = useState<any>(null);
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const apiKey = process.env.REACT_APP_API_KEY;
+  const [markdown, setMarkdown] = useState("");
 
+  const handleChange = (e) => {
+    setMarkdown(e.target.value);
+  };
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: apiKey,
     libraries,
@@ -43,8 +48,17 @@ const MapWithSearch: React.FC = () => {
 
   if (loadError) return <div>Error loading Google Maps</div>;
   if (!isLoaded) return <div>Loading Google Maps...</div>;
+
   return (
     <div>
+      <Helmet>
+        <title>Find Hospital</title>
+        <meta
+          name="description"
+          content="displays google map for users to search for hospital and receive contact details about the hospital"
+        />
+        <link rel="canonical" href="/hospital" />
+      </Helmet>
       <h3>Find Hospitals Near You</h3>
       <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlaceChanged}>
         <div className="container">
@@ -82,6 +96,12 @@ const MapWithSearch: React.FC = () => {
         zoom={6}
         options={options}
       />
+      <h4 className="marker-text">Write Hospital Entries Below</h4>
+      <div className="markdown-container">
+        <textarea value={markdown} onChange={handleChange} />
+
+        <ReactMarkdown children={markdown} className="marker-textarea" />
+      </div>
     </div>
   );
 };

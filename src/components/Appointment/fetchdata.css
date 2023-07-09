@@ -1,0 +1,45 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: black;
+}
+
+th {
+  background-color: #f2f2f2;
+  color: darkblue;
+}
+.table-container h4 {
+  color: darkblue;
+}
+.user_data {
+  margin-top: 30px;
+  font-size: 25px;
+}
+
+@media screen and (max-width: 650px) {
+  .table-container {
+    width: "100%";
+    overflow-y: "auto";
+  }
+  table {
+    overflow-x: auto;
+    display: block;
+  }
+  td,
+  th {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    font-size: large;
+  }
+  .user_data {
+    font-size: 23px;
+  }
+}

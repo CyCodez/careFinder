@@ -42,6 +42,7 @@ p {
 }
 .aboutImg {
   border-radius: 5%;
+  width: 100%;
 }
 .doctor-img {
   border-radius: 50%;
@@ -223,9 +224,19 @@ label {
     justify-content: space-between;
     margin-top: 80px;
   }
+
+  .footer-column h4 {
+    font-size: 20px;
+  }
   .footer-column h3 {
     color: darkblue;
     margin-bottom: 4px;
+  }
+  .form-container {
+    font-size: 20px;
+  }
+  .right-content p {
+    font-size: 20px;
   }
   .content {
     display: flex;
@@ -233,14 +244,16 @@ label {
     justify-content: space-between;
   }
   .aboutImg {
-    border-radius: 5%;
-    width: 340px;
-    margin-left: -25px;
+    /* border-radius: 5%;
+    width: 340px;*/
+    margin-left: 10px;
+    width: 100%;
   }
   .right-content {
-    margin-left: -25px;
+    margin-left: -10px;
     text-align: center;
     text-align: justify;
+    width: 100%;
   }
   .right-content h1 {
     margin-bottom: 2px;
@@ -253,6 +266,9 @@ label {
   .docText h3 {
     margin-left: 2px !important;
     color: orangered;
+  }
+  .user-review h3 {
+    font-size: 25px;
   }
   .three-column-layout {
     display: flex;
@@ -268,5 +284,9 @@ label {
     text-align: justify;
     background-color: #ddd;
     color: black;
+  }
+  .three-column-layout {
+    font-size: 20px;
+    width: 90%;
   }
 }

@@ -1,0 +1,114 @@
+.contact-us-container {
+  margin: 2rem;
+  margin-left: 60px;
+  text-align: justify;
+  display: flex;
+  flex-direction: row;
+}
+.contact-container {
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+.contact-info {
+  margin-bottom: 2rem;
+  flex: 1;
+  padding: 20px;
+  margin: 10px;
+  font-size: 20px;
+}
+.contact-info p {
+  margin-top: 20px;
+}
+.contact-icon {
+  margin: 5px;
+  padding: 7px;
+  font-size: 40px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+.form-group textarea {
+  margin-left: -1px;
+}
+label {
+  display: block;
+  font-weight: bold;
+}
+.contact-form {
+  flex: 1;
+  padding: 20px;
+  margin: 10px;
+}
+.social-media {
+  margin-top: 50px;
+}
+input,
+textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.form-btn {
+  background-color: darkblue;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-left: 45%;
+}
+.social-links {
+  text-align: center;
+}
+.contactHeader {
+  text-align: center;
+  font-size: large;
+}
+.contact-form h2,
+.social-media h2,
+.contact-info h2 {
+  color: darkblue;
+}
+.contactHeader p {
+  font-size: 18px;
+  color: black;
+}
+.contactHeader h2 {
+  margin-top: 35px;
+  color: darkblue;
+}
+@media screen and (max-width: 650px) {
+  .contact-us-container {
+    margin: 2rem;
+    margin-left: -10px;
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+  }
+  .form-btn {
+    background-color: darkblue;
+    color: white;
+    font-size: 18px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-left: 75px;
+  }
+  .form-group textarea {
+    margin-left: -1px;
+  }
+}

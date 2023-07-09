@@ -3,36 +3,7 @@ import { useEffect } from "react";
 import "./Button.css";
 import { signInWithPopup, FacebookAuthProvider } from "firebase/auth";
 import { auth } from "../../firebase-config";
-
-const Login = () => {
-  const HandleLogin = () => {
-    sessionStorage.removeItem("Auth Token");
-    navigate("/register");
-  };
-  let navigate = useNavigate();
-  useEffect(() => {
-    let authToken = sessionStorage.getItem("Auth Token");
-    console.log(authToken);
-    if (authToken) {
-      navigate("/home");
-    }
-
-    if (!authToken) {
-      navigate("/login");
-    }
-  }, []);
-
-  return (
-    <section>
-      <p>
-        dont have an account?
-        <span>
-          <button onClick={HandleLogin}>SignUp</button>
-        </span>
-      </p>
-    </section>
-  );
-};
+import { FaFacebook } from "react-icons/fa";
 
 const Facebook = () => {
   const navigate = useNavigate();
@@ -40,11 +11,11 @@ const Facebook = () => {
     const provider = new FacebookAuthProvider();
     signInWithPopup(auth, provider)
       .then((response) => {
-        let authToken = sessionStorage.getItem("Auth Token");
-
+        sessionStorage.setItem(
+          "Auth Token",
+          response._tokenResponse.refreshToken
+        );
         navigate("/home");
-
-        // console.log(getAuth());
       })
       .catch((err) => {
         console.log(err.message);
@@ -52,9 +23,18 @@ const Facebook = () => {
     return;
   };
 
+  useEffect(() => {
+    let authToken = sessionStorage.getItem("Auth Token");
+
+    if (authToken) {
+      navigate("/home");
+    }
+  }, []);
   return (
     <div>
-      <button onClick={signInWithFacebook}>facebook</button>
+      <button onClick={signInWithFacebook} className="Fbtn">
+        <span>sigIn with</span> <FaFacebook />
+      </button>
     </div>
   );
 };

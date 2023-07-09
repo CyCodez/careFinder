@@ -1,0 +1,13 @@
+https://carefinder-project.web.app
+https://carefinder-project.web.app/login
+https://carefinder-project.web.app/register
+https://carefinder-project.web.app/about
+https://carefinder-project.web.app/startPage
+https://carefinder-project.web.app/contact
+https://carefinder-project.web.app/hospital
+https://carefinder-project.web.app/home
+https://carefinder-project.web.app/library
+https://carefinder-project.web.app/appointment
+https://carefinder-project.web.app/news
+
+

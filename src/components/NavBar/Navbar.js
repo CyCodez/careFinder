@@ -1,12 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./navbar.css";
 import { FaBars } from "react-icons/fa";
-import { FaTimes } from "react-icons/fa";
-import links from "./data";
 import care from "./mycare.png";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
-import { Myroutes } from "./data";
 import { NavLink } from "react-router-dom";
 import Facebook from "../ButtonComponents/Facebook";
 
@@ -15,6 +12,7 @@ const Navbar = () => {
   const linksContainerRef = useRef(null);
   const linksRef = useRef(null);
   let auth = getAuth();
+  const user = auth.currentUser;
   const toggleLinks = () => {
     setShowLinks(!showLinks);
   };
@@ -31,8 +29,6 @@ const Navbar = () => {
   const [modal2IsOpen, setModal2IsOpen] = useState(false);
 
   const Myroutes = () => {
-    let auth = getAuth();
-    const user = auth.currentUser;
     return (
       <div className="links" ref={linksRef}>
         <button className="btnLink">
@@ -100,10 +96,7 @@ const Navbar = () => {
           <button className="auth-Btn" onClick={handleLogout}>
             SignOut
           </button>
-          <button className="auth-Btn">
-            {" "}
-            <Facebook />
-          </button>
+          <button style={{ border: "none" }}>{!user && <Facebook />}</button>
         </div>
       </div>
     </nav>

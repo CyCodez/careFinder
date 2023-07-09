@@ -1,17 +1,11 @@
 import "./App.css";
-import BasicTextFields from "./components/common/Form";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
+import BasicTextFields from "./components/common/Form.tsx";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import HomePage from "./components/Home/home.tsx";
 import About from "./components/About/about.tsx";
 import Map from "./components/FindHospital/Hospital.tsx";
 import Navbar from "./components/NavBar/Navbar";
 import { useState, useEffect } from "react";
-import { app } from "./firebase-config";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -21,30 +15,35 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/ButtonComponents/Login";
 import SignUp from "./components/ButtonComponents/Signup";
-// Require Editor JS files.
-import "froala-editor/js/froala_editor.pkgd.min.js";
-
-// Require Editor CSS files.
-import "froala-editor/css/froala_style.min.css";
-import "froala-editor/css/froala_editor.pkgd.min.css";
-
-// Require Font Awesome.
-
-import FroalaEditor from "react-froala-wysiwyg";
-import { signInWithPopup, FacebookAuthProvider } from "firebase/auth";
-import { auth } from "./firebase-config";
 import Facebook from "./components/ButtonComponents/Facebook";
+import GetStarted from "./components/Home/StartPage/GetStarted.tsx";
+import ContactUs from "./components/Home/contact/ContactUs.tsx";
+import LibraryPage from "./components/Libaray/LbraryPage.tsx";
+import NewsAndMedia from "./components/NewsMedia/NewsAndMedia.tsx";
+import FetchUser from "./components/Appointment/fetchdata";
 
 function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setisLoading] = useState(false);
   let navigate = useNavigate();
+  const auth = getAuth;
+  const user = auth.currentUser;
+  const Loading = () => {
+    return <div className="loading">Signing in...</div>;
+  };
   const handleAction = (id) => {
+    setisLoading(true);
     const authentication = getAuth();
     if (id === 1) {
+      // if (!user) {
+      //   toast.success("logging in...");
+      // }
       signInWithEmailAndPassword(authentication, email, password)
         .then((response) => {
+          setisLoading(false);
           navigate("/home");
+
           sessionStorage.setItem(
             "Auth Token",
             response._tokenResponse.refreshToken
@@ -113,39 +112,15 @@ function App() {
 
   useEffect(() => {
     let authToken = sessionStorage.getItem("Auth Token");
+    sessionStorage.removeItem("Auth Token");
 
     if (authToken) {
       navigate("/home");
     }
   }, []);
 
-  // const Facebook = () => {
-  //   const signInWithFacebook = () => {
-  //     const provider = new FacebookAuthProvider();
-  //     const authentication = getAuth();
-  //     signInWithPopup(auth, provider)
-  //       .then((response) => {
-  //         navigate("/home");
-  //         sessionStorage.setItem(
-  //           "Auth Token",
-  //           response._tokenResponse.refreshToken
-  //         );
-  //       })
-  //       .catch((err) => {
-  //         console.log(err.message);
-  //       });
-  //     return;
-  //   };
-  //   return (
-  //     <div>
-  //       <button onClick={signInWithFacebook}>facebook</button>
-  //     </div>
-  //   );
-  // };
-
   return (
     <div className="App">
-      {/* <FroalaEditor tag="textarea" /> */}
       <ToastContainer />
       <Navbar />
       <div>
@@ -157,6 +132,7 @@ function App() {
                 setEmail={setEmail}
                 setPassword={setPassword}
                 title="login"
+                pwdtxt="password must be at least 6 characters"
                 handleAction={() => handleAction(1)}
               />
             }
@@ -169,6 +145,7 @@ function App() {
                 setPassword={setPassword}
                 title="login to continue"
                 btnTitle="login"
+                pwdtxt="password must be at least 6 characters"
                 SignUpComponent={<Login />}
                 Facebook={<Facebook />}
                 handleAction={() => handleAction(1)}
@@ -181,6 +158,7 @@ function App() {
               <BasicTextFields
                 setEmail={setEmail}
                 setPassword={setPassword}
+                pwdtxt="password must be at least 6 characters"
                 title="To Begin SigUp"
                 btnTitle="signUp"
                 SignUpComponent={<SignUp />}
@@ -189,8 +167,13 @@ function App() {
             }
           />
           <Route path="/about" element={<About />} />
+          <Route path="/startPage" element={<GetStarted />} />
+          <Route path="/contact" element={<ContactUs />} />
           <Route path="/hospital" element={<Map />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/library" element={<LibraryPage />} />
+          <Route path="/appointment" element={<FetchUser />} />
+          <Route path="/news" element={<NewsAndMedia />} />
         </Routes>
       </div>
     </div>

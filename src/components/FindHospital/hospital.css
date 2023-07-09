@@ -100,3 +100,41 @@ input.nosubmit {
 .hospital-phone {
   font-size: 20px;
 }
+.markdown-container {
+  width: 50%;
+  text-align: justify;
+}
+
+textarea {
+  margin-left: 50%;
+}
+.marker-textarea {
+  margin-left: 50%;
+  font-size: large;
+}
+.marker-text {
+  margin-top: 10px;
+  color: darkblue;
+  margin-left: 43%;
+  font-size: large;
+}
+
+@media screen and (max-width: 650px) {
+  .marker-text {
+    margin-top: 10px;
+    color: darkblue;
+    margin-left: 1%;
+    font-size: 20px;
+  }
+  .marker-textarea {
+    margin-left: 5%;
+    font-size: large;
+    text-align: center;
+  }
+  .markdown-container textarea {
+    margin-left: 70px;
+  }
+  textarea {
+    margin-left: 5%;
+  }
+}

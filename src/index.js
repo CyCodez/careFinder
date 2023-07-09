@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App";
 // import { BrowserRouter } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 const app = document.getElementById("root");
 createRoot(app).render(
   <Router>
     <React.StrictMode>
-      <App />
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
     </React.StrictMode>
   </Router>
 );
