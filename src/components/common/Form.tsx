@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from "react";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+import { RiEyeLine, RiEyeOffLine } from "react-icons/ri";
+import { TextField, IconButton, InputAdornment } from "@mui/material";
 import BasicButtons from "./Button.tsx";
 import { Helmet } from "react-helmet-async";
 import "./Form.css";
@@ -14,6 +15,9 @@ interface BasicTextFieldsProps {
   SignUpComponent?: JSX.Element;
   LoginInComponent?: JSX.Element;
   pwdtxt?: string;
+  LoadingState: any;
+  isLoading: boolean;
+  setisLoading: boolean;
 }
 
 const BasicTextFields: React.FC<BasicTextFieldsProps> = ({
@@ -25,7 +29,13 @@ const BasicTextFields: React.FC<BasicTextFieldsProps> = ({
   SignUpComponent,
   LoginInComponent,
   pwdtxt,
+  LoadingState,
+  isLoading,
 }) => {
+  const [showPassword, setShowPassword] = React.useState(false);
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
@@ -59,22 +69,45 @@ const BasicTextFields: React.FC<BasicTextFieldsProps> = ({
         </div>
         <TextField
           id="email"
+          autoComplete="off"
+          sx={{
+            backgroundColor: "#E5F3FD",
+          }}
           label="Enter Your Email"
-          variant="outlined"
+          variant="standard"
           onChange={handleEmailChange}
         />
         <TextField
           id="password"
+          autoComplete="off"
           label="Enter Your Password"
-          variant="outlined"
+          variant="standard"
+          sx={{
+            backgroundColor: "#E5F3FD",
+          }}
+          type={showPassword ? "text" : "password"}
           onChange={handlePasswordChange}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={handleTogglePasswordVisibility}>
+                  {showPassword ? <RiEyeLine /> : <RiEyeOffLine />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
         <p>{pwdtxt}</p>
-        <BasicButtons btnTitle={btnTitle} handleAction={handleAction} />
+
+        {isLoading ? (
+          LoadingState
+        ) : (
+          <BasicButtons btnTitle={btnTitle} handleAction={handleAction} />
+        )}
         {SignUpComponent}
         {LoginInComponent}
       </Box>
-    </div>
+  </div>
   );
 };
 

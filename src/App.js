@@ -28,22 +28,23 @@ function App() {
   const [isLoading, setisLoading] = useState(false);
   let navigate = useNavigate();
   const auth = getAuth;
-  const user = auth.currentUser;
   const Loading = () => {
-    return <div className="loading">Signing in...</div>;
+    return <div className="loading">Logging in please wait...</div>;
+  };
+  const Signing = () => {
+    return <div className="loading">signing in please wait...</div>;
   };
   const handleAction = (id) => {
-    setisLoading(true);
     const authentication = getAuth();
+    setisLoading(true);
     if (id === 1) {
-      // if (!user) {
-      //   toast.success("logging in...");
-      // }
+      setisLoading(true);
       signInWithEmailAndPassword(authentication, email, password)
         .then((response) => {
-          setisLoading(false);
+          setEmail("");
+          setPassword("");
           navigate("/home");
-
+          setisLoading(false);
           sessionStorage.setItem(
             "Auth Token",
             response._tokenResponse.refreshToken
@@ -72,16 +73,19 @@ function App() {
           if (email && password === "") {
             toast.error("enter email and password");
           }
+          setisLoading(false);
         });
       setEmail(" ");
       setPassword(" ");
     }
     if (id === 2) {
+      setisLoading(true);
       createUserWithEmailAndPassword(authentication, email, password)
         .then((response) => {
           setEmail("");
           setPassword("");
           navigate("/home");
+          setisLoading(false);
           sessionStorage.setItem(
             "Auth Token",
             response._tokenResponse.refreshToken
@@ -106,6 +110,7 @@ function App() {
           if (email && password === "") {
             toast.error("enter email and password");
           }
+          setisLoading(false);
         });
     }
   };
@@ -148,6 +153,9 @@ function App() {
                 pwdtxt="password must be at least 6 characters"
                 SignUpComponent={<Login />}
                 Facebook={<Facebook />}
+                LoadingState={<Loading />}
+                isLoading={isLoading}
+                setisLoading={setisLoading}
                 handleAction={() => handleAction(1)}
               />
             }
@@ -159,9 +167,12 @@ function App() {
                 setEmail={setEmail}
                 setPassword={setPassword}
                 pwdtxt="password must be at least 6 characters"
-                title="To Begin SigUp"
+                title="To Begin SignUp"
                 btnTitle="signUp"
                 SignUpComponent={<SignUp />}
+                LoadingState={<Signing />}
+                isLoading={isLoading}
+                setisLoading={setisLoading}
                 handleAction={() => handleAction(2)}
               />
             }

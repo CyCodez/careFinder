@@ -8,6 +8,9 @@ import "./hospital.css";
 import ReactMarkdown from "react-markdown";
 import { FaPhone } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
+import { getStorage, ref, uploadString } from "firebase/storage";
+import Papa from "papaparse";
+
 const libraries = ["places"];
 const mapContainerStyle = {
   width: "100%",
@@ -42,12 +45,50 @@ const MapWithSearch: React.FC = () => {
 
   const onPlaceChanged = () => {
     const places = searchBox.getPlaces();
-    // Perform logic with the retrieved places (e.g., displaying hospital locations)
     setSearchResults(places);
   };
 
   if (loadError) return <div>Error loading Google Maps</div>;
   if (!isLoaded) return <div>Loading Google Maps...</div>;
+
+  const shareViaEmail = () => {
+    const csvData = searchResults.map((place) => ({
+      Name: place.name,
+      Address: place.formatted_address,
+      phone: place.international_phone_number,
+    }));
+
+    const csvString = Papa.unparse(csvData);
+    const storage = getStorage();
+    const storageRef = ref(storage, "hospital_search_results.csv");
+    uploadString(storageRef, csvString, "raw").then(() => {
+      console.log("CSV file uploaded to Firebase Storage");
+    });
+    const emailSubject = "Hospital Search Results";
+    const emailBody = `Please find below the hospital search results:\n\n${csvString}`;
+
+    const mailToLink = `mailto:?subject=${encodeURIComponent(
+      emailSubject
+    )}&body=${encodeURIComponent(emailBody)}`;
+
+    window.location.href = mailToLink;
+  };
+
+  const downloadCsv = () => {
+    const csvDatas = searchResults.map((place) => ({
+      Name: place.name,
+      Address: place.formatted_address,
+      phone: place.international_phone_number,
+    }));
+
+    const csvString = Papa.unparse(csvDatas);
+    const csvBlob = new Blob([csvString], { type: "text/csv" });
+    const csvUrl = URL.createObjectURL(csvBlob);
+    const link = document.createElement("a");
+    link.href = csvUrl;
+    link.download = "hospital_search_results.csv";
+    link.click();
+  };
 
   return (
     <div>
@@ -86,6 +127,14 @@ const MapWithSearch: React.FC = () => {
               {place.international_phone_number}
             </a>
             <p>{place.email}</p>
+            <div className="mail">
+              <button onClick={shareViaEmail} className="mail-btn">
+                export & share
+              </button>
+              <button onClick={downloadCsv} className="mail-btn">
+                Download CSV
+              </button>
+            </div>
           </div>
         ))}
       </div>

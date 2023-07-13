@@ -138,3 +138,21 @@ textarea {
     margin-left: 5%;
   }
 }
+.mail-btn {
+  margin-right: 30px;
+  background-color: darkblue;
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  padding: 3px;
+  margin-bottom: 50px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+  transition: 0.3s ease-in-out;
+}
+
+.mail-btn:hover {
+  background-color: #200462;
+}
