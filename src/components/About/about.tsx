@@ -12,58 +12,18 @@ import doc3 from "./images/doctor3.jpg";
 import doc4 from "./images/doctor4.jpg";
 import doc5 from "./images/doctor5.jpg";
 import doc6 from "./images/doctor6.jpg";
+import {
+  doctor1,
+  doctor2,
+  doctor3,
+  doctor4,
+  doctor5,
+  doctor6,
+} from "./doctorModal/doctorModal.tsx";
 import Form from "./Form.tsx";
 import { Helmet } from "react-helmet-async";
 import { Button, Modal, Typography } from "@mui/material";
-
-interface DoctorProfile {
-  name: string;
-  specialization: string;
-  experience: number;
-  email: any;
-  phone: any;
-  avaliable: string;
-}
-
-const DoctorModal = ({
-  isOpen,
-  onClose,
-  doctor,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  doctor: DoctorProfile;
-}) => {
-  return (
-    <Modal open={isOpen} onClose={onClose} className="modalContainer">
-      <div className="modalContent">
-        <Typography
-          variant="h5"
-          component="div"
-          gutterBottom
-          className="profileName"
-        >
-          {doctor.name}
-        </Typography>
-        <Typography variant="body1" gutterBottom className="profileInfo">
-          <b>Specialization:</b> {doctor.specialization}
-        </Typography>
-        <Typography variant="body1" gutterBottom className="profileInfo">
-          <b>Experience:</b> {doctor.experience} years
-        </Typography>
-        <Typography variant="body1" gutterBottom className="profileInfo">
-          <b>Email:</b> {doctor.email}
-        </Typography>
-        <Typography variant="body1" gutterBottom className="profileInfo">
-          <b>phone:</b> {doctor.phone}
-        </Typography>
-        <Typography variant="body1" gutterBottom className="profileInfo">
-          <b>Avaliable:</b> {doctor.avaliable}
-        </Typography>
-      </div>
-    </Modal>
-  );
-};
+import DoctorModal from "./doctorModal/doctorModal.tsx";
 
 function About(): JSX.Element {
   const auth = getAuth();
@@ -76,12 +36,6 @@ function About(): JSX.Element {
   const [isModalOpen6, setIsModalOpen6] = useState(false);
 
   const openModal1 = () => {
-    let auth = getAuth();
-    const user = auth.currentUser;
-    if (user) {
-      alert("login first");
-      return;
-    }
     setIsModalOpen1(true);
   };
 
@@ -125,57 +79,6 @@ function About(): JSX.Element {
 
   const closeModal6 = () => {
     setIsModalOpen6(false);
-  };
-
-  const doctor1: DoctorProfile = {
-    name: "Dr. John Doe",
-    specialization: "Cardiology",
-    experience: 10,
-    email: <a href="mailto:">johnDoe@gmail.com</a>,
-    phone: <a href="+23455588870">+23455588870</a>,
-    avaliable: "Monday to friday",
-  };
-
-  const doctor2: DoctorProfile = {
-    name: "Dr. James Smith",
-    specialization: "Dermatology",
-    experience: 8,
-    email: <a href="mailto:">jamesSmith@gmail.com</a>,
-    phone: <a href="+23455588870">+23488550041</a>,
-    avaliable: "Monday to friday",
-  };
-  const doctor3: DoctorProfile = {
-    name: "Dr. Angela Jones",
-    specialization: "Optician",
-    experience: 20,
-    email: <a href="mailto:">angelaJones@gmail.com</a>,
-    phone: <a href="+23455588870">+234333335555</a>,
-    avaliable: "Monday to friday",
-  };
-  const doctor4: DoctorProfile = {
-    name: "Dr. Mark Johnson",
-    specialization: "Pediatrician",
-    experience: 16,
-    email: <a href="mailto:">markJohnson@gmail.com</a>,
-    phone: <a href="+23455588870">+234000007771</a>,
-    avaliable: "Monday to friday",
-  };
-
-  const doctor5: DoctorProfile = {
-    name: "Dr. Sarah Davis",
-    specialization: "Obsterician",
-    experience: 30,
-    email: <a href="mailto:">sarahDavis@gmail.com</a>,
-    phone: <a href="+23455588870">+234777799993</a>,
-    avaliable: "Monday to friday",
-  };
-  const doctor6: DoctorProfile = {
-    name: "Dr. Michael Marvins",
-    specialization: "Gynaecologist",
-    experience: 12,
-    email: <a href="mailto:">michaelMarvins@gmail.com</a>,
-    phone: <a href="+23455588870">+2348888111000</a>,
-    avaliable: "Monday to friday",
   };
 
   useEffect(() => {
