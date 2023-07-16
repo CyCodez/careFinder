@@ -108,6 +108,10 @@ input.nosubmit {
 textarea {
   margin-left: 50%;
 }
+.edit {
+  margin: 0 auto;
+  width: 100%;
+}
 .marker-textarea {
   margin-left: 50%;
   font-size: large;

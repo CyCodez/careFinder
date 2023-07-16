@@ -5,7 +5,11 @@ import {
   useLoadScript,
 } from "@react-google-maps/api";
 import "./hospital.css";
-import ReactMarkdown from "react-markdown";
+import FooterLayout from "../About/FooterLayout.tsx";
+import "@toast-ui/editor/dist/toastui-editor.css";
+
+import { Editor } from "@toast-ui/react-editor";
+
 import { FaPhone } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import { getStorage, ref, uploadString } from "firebase/storage";
@@ -145,12 +149,17 @@ const MapWithSearch: React.FC = () => {
         zoom={6}
         options={options}
       />
-      <h4 className="marker-text">Write Hospital Entries Below</h4>
-      <div className="markdown-container">
-        <textarea value={markdown} onChange={handleChange} />
-
-        <ReactMarkdown children={markdown} className="marker-textarea" />
+      <h4 className="marker-text">Edit Your Content Here</h4>
+      <div className="edit">
+        <Editor
+          initialValue="hello react editor world!"
+          previewStyle="vertical"
+          height="600px"
+          initialEditType="markdown"
+          useCommandShortcut={true}
+        />
       </div>
+      <FooterLayout />
     </div>
   );
 };
